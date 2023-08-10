@@ -38,6 +38,12 @@ class Task(models.Model):
 
     class Meta:
         ordering = ["name"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["name"],
+                name="unique_name"
+            )
+        ]
 
     def __str__(self):
         return (
@@ -53,6 +59,7 @@ class Position(models.Model):
     class Meta:
         ordering = ["name"]
 
+
     def __str__(self):
         return self.name
 
@@ -61,6 +68,7 @@ class Worker(AbstractUser):
 
     class Meta:
         ordering = ["username"]
+
 
     def __str__(self):
         return f"Username: {self.username}. My name is {self.first_name} {self.last_name}"

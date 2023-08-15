@@ -1,0 +1,18 @@
+{% extends 'layouts/base_background.html' %}
+
+{% block title %}
+  <title>Home page</title>
+{% endblock %}
+
+{% block content %}
+  <h1> Hello we will try works in the new project</h1>
+    <p>What we have in the project</p>
+    <br>
+    <h3>Content</h3>
+      <ul>
+        <li>We have a lot of person {{ num_worker }}</li>
+        <li>We have a lot of Taks {{ num_tasks }}</li>
+        <li>We have a work with different tasks {{ num_type_of_tasks }}</li>
+        <li>Different position {{ position }}</li>
+      </ul>
+{% endblock %}

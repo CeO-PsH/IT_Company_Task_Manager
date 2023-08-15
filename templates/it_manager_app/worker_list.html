@@ -1,0 +1,15 @@
+{% extends "layouts/base_background.html" %}
+
+
+{% block content %}
+  <h1>Workers</h1>
+
+  {% if worker_list %}
+    {% for worker in worker_list %}
+      <li>
+        <a href="{% url 'it_manager_app:worker-detail' pk=worker.pk%}"> {{ worker.username }}</a>
+
+      </li>
+    {% endfor %}
+  {% endif %}
+{% endblock %}

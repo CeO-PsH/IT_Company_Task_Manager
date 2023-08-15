@@ -1,0 +1,21 @@
+{% extends 'layouts/base_background.html' %}
+
+
+{% block content %}
+  <h1>Task: {{ task.name }}</h1>
+  <h3>Priority {{ task.priority }}</h3>
+
+  <p> {{ task.description }} </p>
+  <div class="ml-3"></div>
+    <h3>Workers </h3>
+      {% for worker in task.assignees.all %}
+        <hr>
+        <p class="text-muted"><strong>ID: {{ worker.id }}</strong>
+        <p>{{ worker.first_name }} {{ worker.last_name }}
+        {% if worker.position %}
+          {{ worker.position }}
+        {% endif %}</p>
+        {% empty %}
+        <p>Sorry we don`t know who must do this tasks</p>
+      {% endfor %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "layouts/base_background.html" %}
+
+
+{% block content %}
+  <h1>Hello Tasks</h1>
+
+  {% if task_list %}
+    {% for task in task_list %}
+      <li>
+        <a href="{% url 'it_manager_app:task-detail' pk=task.pk%}"> {{ task.name }}</a>
+        (description: {{ task.description }}, is_completed: {{ task.is_completed }}, type: {{ task.task_type }})
+      </li>
+    {% endfor %}
+  {% endif %}
+
+{% endblock %}

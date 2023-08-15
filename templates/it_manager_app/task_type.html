@@ -1,0 +1,11 @@
+{% extends "layouts/base_background.html" %}
+
+{% block content %}
+  <h1>Hello Type of tasks</h1>
+
+  {% if task_type_list %}
+    {% for task in task_type_list %}
+      <li>{{ task }}! </li>
+    {% endfor %}
+  {% endif %}
+{% endblock %}

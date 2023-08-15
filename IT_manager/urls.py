@@ -22,5 +22,6 @@ from django.conf import settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("it_manager_app.urls", namespace="it_manager_app")),
+    path("", include("django.contrib.auth.urls")),
     path("__debug__/", include("debug_toolbar.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -3,6 +3,15 @@
 
 
 {% block content %}
-  <h1> Worker {{ worker.first_name }} {{ worker.last_name }}</h1>
-  <p> Position is: {{ worker.position }} </p>
+  <h1> Worker <strong>ID: {{ worker.pk }}</strong> {{ worker.first_name }} {{ worker.last_name }}</h1>
+  <h4> Position is: {{ worker.position }} </h4>
+  {% for task in  worker.tasks.all %}
+    {% if task %}
+      <hr>
+      <p class="text-muted"><strong>ID: {{ task.id }}</strong>
+      <p>{{ task.name }} - {{ task.description }}</p>
+    {% endif %}
+    {% empty %}
+      <p>Sorry we don`t have tasks</p>
+  {% endfor %}
 {% endblock %}

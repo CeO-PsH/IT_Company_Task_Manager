@@ -11,8 +11,9 @@
     <h3>Content</h3>
       <ul>
         <li>We have a lot of person {{ num_worker }}</li>
-        <li>We have a lot of Taks {{ num_tasks }}</li>
+        <li>We have a lot of Tasks {{ num_tasks }}</li>
         <li>We have a work with different tasks {{ num_type_of_tasks }}</li>
         <li>Different position {{ position }}</li>
       </ul>
+  <p>Visits this site {{ num_visits }} time{{ num_visits|pluralize }}</p>
 {% endblock %}

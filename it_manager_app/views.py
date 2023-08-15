@@ -11,11 +11,15 @@ def index(request):
     num_type_of_tasks = TaskType.objects.count()
     position = Position.objects.count()
 
+    num_visits = request.session.get("num_visits", 1)
+    request.session["num_visits"] = num_visits + 1
+
     context = {
         "num_worker" : num_worker,
         "num_tasks": num_tasks,
         "num_type_of_tasks": num_type_of_tasks,
         "position": position,
+        "num_visits": num_visits
     }
     return render(request, "it_manager_app/index.html", context=context)
 

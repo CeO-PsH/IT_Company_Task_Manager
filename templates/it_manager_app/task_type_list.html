@@ -1,7 +1,10 @@
 {% extends "layouts/base_background.html" %}
 
 {% block content %}
-  <h1>Hello Type of tasks</h1>
+  <h1>
+  Hello Type of tasks
+  <a style="float: right" href="{% url 'it_manager_app:task-type-create'%}">+</a>
+  </h1>
 
   {% if task_type_list %}
     {% for task in task_type_list %}

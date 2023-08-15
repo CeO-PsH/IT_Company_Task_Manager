@@ -1,7 +1,10 @@
 {% extends "layouts/base_background.html" %}
 
 {% block content %}
-  <h1>Hello Position</h1>
+  <h1>
+  Hello Position
+    <a style="float: right" href="{% url 'it_manager_app:position-create'%}">+</a>
+  </h1>
 
   {% if position_list %}
     {% for position in position_list %}

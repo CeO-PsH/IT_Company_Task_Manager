@@ -1,7 +1,9 @@
-from django.http import HttpResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import generic
 
+from IT_manager.forms import TacksForm
 from it_manager_app.models import Worker, Task, TaskType, Position
 
 
@@ -24,32 +26,49 @@ def index(request):
     return render(request, "it_manager_app/index.html", context=context)
 
 
-class TaskTypeListView(generic.ListView):
+class TaskTypeListView(LoginRequiredMixin, generic.ListView):
     model = TaskType
-    template_name = "it_manager_app/task_type.html"
+    template_name = "it_manager_app/task_type_list.html"
     context_object_name = "task_type_list"
     paginate_by = 10
 
+class TaskTypeCreateView(LoginRequiredMixin, generic.CreateView):
+    model = TaskType
+    fields = "__all__"
+    success_url = reverse_lazy("it_manager_app:task_type-list")
+    template_name = "it_manager_app/task_type_form.html"
 
-class TaskListView(generic.ListView):
+
+class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     queryset = Task.objects.select_related("task_type")
     paginate_by = 10
 
 
-class TaskDetailView(generic.DetailView):
+class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
 
+class TaskCreateView(LoginRequiredMixin, generic.CreateView):
+    form_class = TacksForm
+    success_url = reverse_lazy("it_manager_app:position-list")
+    template_name = "it_manager_app/task_form.html"
 
-class PositionListView(generic.ListView):
+
+class PositionListView(LoginRequiredMixin, generic.ListView):
     model = Position
     paginate_by = 10
 
 
-class WorkerListView(generic.ListView):
+class PositionCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Position
+    fields = "__all__"
+    success_url = reverse_lazy("it_manager_app:position-list")
+
+
+class WorkerListView(LoginRequiredMixin, generic.ListView):
     model = Worker
     paginate_by = 10
 
 
-class WorkerDetailView(generic.DetailView):
+class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker

@@ -7,7 +7,13 @@ class TaskType(models.Model):
     name = models.CharField(max_length=255)
 
     class Meta:
-        ordering = ["name"]
+        ordering = ["id"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["name"],
+                name="unique_type_name"
+            )
+        ]
 
     def __str__(self):
         return self.name
@@ -58,6 +64,12 @@ class Position(models.Model):
 
     class Meta:
         ordering = ["name"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["name"],
+                name="unique_position_name"
+            )
+        ]
 
 
     def __str__(self):

@@ -1,0 +1,12 @@
+{% extends 'layouts/base_background.html'%}
+
+{% block content %}
+  <h1> Do you really want to delete this position</h1>
+  <p>All tasks with this {{ position }} will be also deleted  </p>
+
+  <form action="" method="post">
+  {% csrf_token %}
+    <input type="submit" value="Yes delete" class="brn btn-danger">
+    <a href="position_list.html" class="btn">Cancel</a>
+  </form>
+{% endblock %}

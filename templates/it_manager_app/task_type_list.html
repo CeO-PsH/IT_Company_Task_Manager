@@ -7,8 +7,31 @@
   </h1>
 
   {% if task_type_list %}
+    <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+
+
     {% for task in task_type_list %}
-      <li>{{ task }}! </li>
+      <tr>
+        <td>
+          {{ task.id }}
+        </td>
+        <td>
+          {{ task.name }}
+        </td>
+        <td>
+          <a href="{% url "it_manager_app:task-type-update" pk=task.id %}">Update</a>
+        </td>
+        <td>
+          <a href="{% url "it_manager_app:task-type-delete" pk=task.id %}">Delete</a>
+        </td>
+      </tr>
     {% endfor %}
+    </table>
   {% endif %}
 {% endblock %}

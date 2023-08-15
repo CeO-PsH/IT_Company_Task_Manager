@@ -1,0 +1,12 @@
+{% extends 'layouts/base_background.html'%}
+
+{% block content %}
+  <h1> Do you really want to delete this Type of Task</h1>
+  <p>All tasks with this type will be also deleted {{ tasktype }} </p>
+
+  <form action="" method="post">
+  {% csrf_token %}
+    <input type="submit" value="Yes delete" class="brn btn-danger">
+    <a href="task_type_list.html" class="btn">Cancel</a>
+  </form>
+{% endblock %}

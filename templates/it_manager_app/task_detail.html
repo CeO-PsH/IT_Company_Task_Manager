@@ -21,4 +21,13 @@
         {% empty %}
         <p>Sorry we don`t know who must do this tasks</p>
       {% endfor %}
+
+  {% if task in user.tasks.all %}
+      <a href="{% url 'it_manager_app:task-assign' pk=task.id %}" class="btn btn-danger link-to-page">
+        Delete me from this task</a>
+  {% else %}
+      <a href="{% url 'it_manager_app:task-assign' pk=task.id %}" class="btn btn-primary link-to-page">
+        Assign me from this task</a>
+    {% csrf_token %}
+  {% endif %}
 {% endblock %}

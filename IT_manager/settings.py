@@ -120,6 +120,8 @@ AUTH_USER_MODEL = "it_manager_app.Worker"
 
 LOGIN_REDIRECT_URL = "/"
 
+LOGIN_URL = "/login/"
+
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"

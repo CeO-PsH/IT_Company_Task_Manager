@@ -7,11 +7,31 @@
   </h1>
 
   {% if worker_list %}
-    {% for worker in worker_list %}
-      <li>
-        <a href="{% url 'it_manager_app:worker-detail' pk=worker.pk%}"> {{ worker.username }}</a>
 
-      </li>
+    <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Full Name</th>
+      <th>Username</th>
+      <th>Position</th>
+    </tr>
+
+    {% for worker in worker_list %}
+      <tr>
+        <td>
+          <a href="{{ worker.get_absolute_url }}">{{ worker.id }}</a>
+        </td>
+        <td>
+          {{ worker.first_name }} {{ worker.last_name }}
+        </td>
+        <td>
+          {{ worker.username }}
+        </td>
+        <td>
+          {{ worker.position|default_if_none:"" }}
+        </td>
+      </tr>
     {% endfor %}
+    </table>
   {% endif %}
 {% endblock %}

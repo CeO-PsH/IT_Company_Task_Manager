@@ -11,12 +11,48 @@
   {% include 'includes/search_form.html' %}
 
   {% if task_list %}
-    {% for task in task_list %}
-      <li>
-        <a href="{% url 'it_manager_app:task-detail' pk=task.pk%}"> {{ task.name }}</a>
-        (description: {{ task.description }}, is_completed: {{ task.is_completed }}, type: {{ task.task_type }})
-      </li>
-    {% endfor %}
-  {% endif %}
+        <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Deadline</th>
+      <th>Completed</th>
+      <th>Priority</th>
+      <th>Task Type</th>
+      <th>Your task</th>
+    </tr>
 
+    {% for task in task_list %}
+      <tr>
+        <td>
+          <a href="{{ task.get_absolute_url }}">{{ task.id }}</a>
+        </td>
+        <td>
+          {{ task.name }}
+        </td>
+        <td>
+          {{ task.deadline }}
+        </td>
+        <td>
+          {{ task.is_completed }}
+        </td>
+        <td>
+          {{ task.Priority }}
+        </td>
+        <td>
+          {{ task.task_type }}
+        </td>
+        {% if task in user.tasks.all %}
+          <td>
+            My Task
+          </td>
+        {% else %}
+          <td>
+            -
+          </td>
+        {% endif %}
+      </tr>
+    {% endfor %}
+    </table>
+  {% endif %}
 {% endblock %}

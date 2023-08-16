@@ -1,4 +1,6 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -7,6 +9,7 @@ from IT_manager.forms import TacksForm, WorkerCreationForm, SearchForm
 from it_manager_app.models import Worker, Task, TaskType, Position
 
 
+@login_required
 def index(request):
     num_worker = Worker.objects.count()
     num_tasks = Task.objects.count()
@@ -44,7 +47,7 @@ class TaskTypeListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        queryset = Task.objects.select_related("task_type")
+        queryset = TaskType.objects.all()
 
         form = SearchForm(self.request.GET)
 
@@ -134,7 +137,7 @@ class PositionListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        queryset = Task.objects.select_related("task_type")
+        queryset = Position.objects.all()
 
         form = SearchForm(self.request.GET)
 
@@ -173,3 +176,14 @@ class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
 class WorkerCreateView(LoginRequiredMixin, generic.CreateView):
     model = Worker
     form_class = WorkerCreationForm
+
+@login_required
+def task_assign(request, pk):
+    worker = Worker.objects.get(id=request.user.id)
+    if (
+        Task.objects.get(id=pk) in worker.tasks.all()
+    ):  # probably could check if car exists
+        worker.tasks.remove(pk)
+    else:
+        worker.tasks.add(pk)
+    return HttpResponseRedirect(reverse_lazy("it_manager_app:task-detail", args=[pk]))

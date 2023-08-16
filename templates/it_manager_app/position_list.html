@@ -6,6 +6,8 @@
     <a style="float: right" href="{% url 'it_manager_app:position-create'%}">+</a>
   </h1>
 
+  {% include 'includes/search_form.html' %}
+
   {% if position_list %}
      <table class="table">
     <tr>

@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
+from django.utils import timezone
 
 
 class TaskType(models.Model):
@@ -28,7 +30,7 @@ class Task(models.Model):
     ]
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    deadline = models.DateTimeField(auto_now_add=False)
+    deadline = models.DateTimeField(auto_now_add=False, default=timezone.now)
     is_completed = models.BooleanField(default=False)
     priority = models.CharField(
         max_length=20,
@@ -50,6 +52,10 @@ class Task(models.Model):
                 name="unique_name"
             )
         ]
+
+    def  get_absolute_url(self):
+        return reverse("it_manager_app:task-detail", args=[str(self.id)])
+
 
     def __str__(self):
         return (
@@ -81,6 +87,9 @@ class Worker(AbstractUser):
     class Meta:
         ordering = ["username"]
 
+
+    def  get_absolute_url(self):
+        return reverse("it_manager_app:worker-detail", args=[str(self.id)])
 
     def __str__(self):
         return f"Username: {self.username}.({self.first_name} {self.last_name})"

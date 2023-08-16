@@ -2,7 +2,9 @@
 
 
 {% block content %}
-  <h1>Workers</h1>
+  <h1>Workers
+        <a style="float: right" href="{% url 'it_manager_app:worker-create'%}">+</a>
+  </h1>
 
   {% if worker_list %}
     {% for worker in worker_list %}

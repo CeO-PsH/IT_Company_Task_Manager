@@ -1,4 +1,5 @@
 {% extends "layouts/base_background.html" %}
+{% load crispy_forms_filters %}
 
 
 {% block content %}
@@ -6,6 +7,9 @@
     Hello Tasks
       <a style="float: right" href="{% url 'it_manager_app:task-create'%}">+</a>
   </h1>
+
+  {% include 'includes/search_form.html' %}
+
   {% if task_list %}
     {% for task in task_list %}
       <li>

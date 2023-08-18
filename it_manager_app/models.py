@@ -42,7 +42,10 @@ class Task(models.Model):
         on_delete=models.CASCADE,
         related_name="tasks"
     )
-    assignees = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="tasks")
+    assignees = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name="tasks"
+    )
 
     class Meta:
         ordering = ["name"]
@@ -53,15 +56,13 @@ class Task(models.Model):
             )
         ]
 
-    def  get_absolute_url(self):
+    def get_absolute_url(self):
         return reverse("it_manager_app:task-detail", args=[str(self.id)])
-
 
     def __str__(self):
         return (
             f"Name: {self.name}, description: {self.description}."
-            f" Priority: {self.priority}. Who assignees {self.assignees}."
-            f" Completed: {self.is_completed}"
+            f" Priority: {self.priority}.Completed: {self.is_completed}"
         )
 
 
@@ -77,19 +78,25 @@ class Position(models.Model):
             )
         ]
 
-
     def __str__(self):
         return self.name
 
+
 class Worker(AbstractUser):
-    position = models.ForeignKey(Position, on_delete=models.CASCADE, related_name="workers", null=True)
+    position = models.ForeignKey(
+        Position,
+        on_delete=models.CASCADE,
+        related_name="workers",
+        null=True
+    )
 
     class Meta:
         ordering = ["username"]
 
-
-    def  get_absolute_url(self):
+    def get_absolute_url(self):
         return reverse("it_manager_app:worker-detail", args=[str(self.id)])
 
     def __str__(self):
-        return f"Username: {self.username}.({self.first_name} {self.last_name})"
+        return (
+            f"Username: {self.username}.({self.first_name} {self.last_name})"
+        )

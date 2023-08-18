@@ -8,40 +8,40 @@ from django.utils.datetime_safe import datetime
 from it_manager_app.models import Task, Worker
 
 
-
 class TacksForm(forms.ModelForm):
     today = datetime.now()
-    aware_datetime = timezone.make_aware(today, timezone.get_default_timezone())
+    aware_datetime = timezone.make_aware(
+        today,
+        timezone.get_default_timezone()
+    )
     assignees = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
-        widget= forms.CheckboxSelectMultiple,
+        widget=forms.CheckboxSelectMultiple,
         required=False
     )
 
     deadline = forms.SplitDateTimeField(
         widget=forms.SplitDateTimeWidget(
-        date_attrs={
-            'type':'date'
-            },
-        date_format='%d/%m/%Y',
-        time_attrs={
-            'type':'time'
-            },
-        time_format='%H:%M',
+            date_attrs={"type": "date"},
+            date_format="%d/%m/%Y",
+            time_attrs={"type": "time"},
+            time_format="%H:%M",
         ),
         validators=[MinValueValidator(aware_datetime)])
-
 
     class Meta:
         model = Task
         fields = "__all__"
 
 
-
 class WorkerCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = Worker
-        fields = UserCreationForm.Meta.fields + ("position","first_name", "last_name",)
+        fields = (
+            UserCreationForm.Meta.fields
+            + ("position", "first_name", "last_name",)
+        )
+
 
 class SearchForm(forms.Form):
     name = forms.CharField(
@@ -51,6 +51,7 @@ class SearchForm(forms.Form):
         widget=forms.TimeInput(attrs={"placeholder": "Search by name"})
     )
 
+
 class WorkersSearchForm(forms.Form):
     username = forms.CharField(
         label="",
@@ -58,5 +59,3 @@ class WorkersSearchForm(forms.Form):
         required=False,
         widget=forms.TimeInput(attrs={"placeholder": "Search by username"})
     )
-
-

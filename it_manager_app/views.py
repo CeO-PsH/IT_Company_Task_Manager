@@ -5,7 +5,12 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from IT_manager.forms import TacksForm, WorkerCreationForm, SearchForm, WorkersSearchForm
+from IT_manager.forms import (
+    TacksForm,
+    WorkerCreationForm,
+    SearchForm,
+    WorkersSearchForm
+)
 from it_manager_app.models import Worker, Task, TaskType, Position
 
 
@@ -58,12 +63,12 @@ class TaskTypeListView(LoginRequiredMixin, generic.ListView):
 
         return queryset
 
+
 class TaskTypeCreateView(LoginRequiredMixin, generic.CreateView):
     model = TaskType
     fields = "__all__"
     success_url = reverse_lazy("it_manager_app:task_type-list")
     template_name = "it_manager_app/task_type_form.html"
-
 
 
 class TaskTypeUpdate(LoginRequiredMixin, generic.UpdateView):
@@ -82,7 +87,6 @@ class TaskTypeDelete(LoginRequiredMixin, generic.DeleteView):
 class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     paginate_by = 10
-
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(TaskListView, self).get_context_data(**kwargs)
@@ -107,16 +111,20 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 
         return queryset
 
+
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
+
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
     form_class = TacksForm
 
+
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
     form_class = TacksForm
+
 
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Task
@@ -127,7 +135,6 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
 class PositionListView(LoginRequiredMixin, generic.ListView):
     model = Position
     paginate_by = 10
-
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(PositionListView, self).get_context_data(**kwargs)
@@ -152,15 +159,18 @@ class PositionListView(LoginRequiredMixin, generic.ListView):
 
         return queryset
 
+
 class PositionCreateView(LoginRequiredMixin, generic.CreateView):
     model = Position
     fields = "__all__"
     success_url = reverse_lazy("it_manager_app:position-list")
 
+
 class PositionTypeUpdate(LoginRequiredMixin, generic.UpdateView):
     model = Position
     fields = "__all__"
     success_url = reverse_lazy("it_manager_app:position-list")
+
 
 class PositionTypeDelete(LoginRequiredMixin, generic.DeleteView):
     model = Position
@@ -195,6 +205,7 @@ class WorkerListView(LoginRequiredMixin, generic.ListView):
 
         return queryset
 
+
 class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker
 
@@ -203,9 +214,11 @@ class WorkerCreateView(LoginRequiredMixin, generic.CreateView):
     model = Worker
     form_class = WorkerCreationForm
 
+
 class WorkerUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Worker
     form_class = WorkerCreationForm
+
 
 class WorkerDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Worker
@@ -222,8 +235,10 @@ def task_assign(request, pk):
         worker.tasks.remove(pk)
     else:
         worker.tasks.add(pk)
-    return HttpResponseRedirect(reverse_lazy("it_manager_app:task-detail", args=[pk]))
+    return HttpResponseRedirect(
+        reverse_lazy("it_manager_app:task-detail", args=[pk])
+    )
 
-
+@login_required
 def about_us(request):
     return render(request, "it_manager_app/about-us.html")

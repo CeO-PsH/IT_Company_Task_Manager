@@ -1,0 +1,16 @@
+{% load crispy_forms_filters %}
+
+<div class="container">
+    <div class="row justify-content-center align-items-center mt-2">
+        <div class="col-md-6">
+            <form action="" method="get" style="max-height: 40px;">
+                <div class="row justify-content-center align-items-center">
+                    <div class="input-group-sm">
+                        {{ search_form|crispy }}
+                    </div>
+                    <input type="submit" class="btn btn-warning">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
+
+{% block body_class %}
+  <header class="header-2">
+    <div class="page-header min-vh-45 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg10.jpg')">
+      <span class="mask bg-gradient-faded-warning opacity-4"></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 text-center mx-auto">
+            <h1 class="text-white pt-3 mt-n5">Types of task</h1>
+            <a href="{% url 'it_manager_app:task-type-create'%}" class="btn btn-warning">Create tasks</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="row justify-content-center align-items-center mt-2">
+      <div class="d-flex justify-content-between align-items-center">
+        {% include 'includes/search_form.html' %}
+      </div>
+    </div>
+  </div>
+  <div class="table-container text-center mt-6">
+    <div class="d-inline-block smaller-block" style="width: 50% ;">
+      {% if task_type_list %}
+      <table style="color: black" class="table align-items-center">
+        <thead style="color: black">
+          <tr style="color: black">
+          <th>ID</th>
+          <th>Name</th>
+          <th>Update</th>
+          <th>Delete</th>
+          </tr>
+        </thead>
+        <hr>
+        {% for task in task_type_list %}
+          <tbody>
+            <tr>
+              <td>{{ task.id }}</td>
+              <td>{{ task.name }}</td>
+              <td><a class="link-info" href="{% url "it_manager_app:task-type-update" pk=task.id %}">Update</a></td>
+              <td><a class="link-info" href="{% url "it_manager_app:task-type-delete" pk=task.id %}">Delete</a></td>
+            </tr>
+          </tbody>
+        {% endfor %}
+      </table>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

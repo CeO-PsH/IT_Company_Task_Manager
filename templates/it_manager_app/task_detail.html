@@ -1,0 +1,84 @@
+{% extends "layouts/base.html" %}
+
+{% block body_class %}
+  <header class="header-2">
+    <div class="page-header min-vh-45 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg10.jpg')">
+      <span class="mask bg-gradient-faded-warning opacity-4"></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 text-center mx-auto">
+            <h1 class="text-white pt-3 mt-n5">
+              Task detail
+              {% if task.is_completed is True %}
+              <h3 style="color: green"> Task Completed </h3>
+                {% else %}
+                <h3 style="color: red">Task required </h3>
+              {% endif %}
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+    <h1>{{ task.name }} </h1>
+    <h2>Priority:<strong class="text-dark"> {{ task.priority }} | Deadline: {{ task.deadline }}</strong></h2>
+    <h6>Type of tasks: <strong>{{ task.task_type.name }}</strong></h6>
+    <a href="{% url 'it_manager_app:task-delete' pk=task.id %}" class="btn btn-danger link-to-page">
+      Delete
+    </a>
+    <a href="{% url 'it_manager_app:task-update' pk=task.id %}" class="btn btn-secondary link-to-page">
+      Update
+    </a>
+  </div>
+  <div class="container mt-2">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-12">
+          <h3>Description</h3>
+          <p>{{ task.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container mt-2">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="container mt-2">
+          <div class="row">
+            <div class="col-md-6">
+              <h3>Workers</h3>
+            </div>
+            <div class="col-md-6 text-end">
+              {% if task.is_completed is False %}
+                {% if task in user.tasks.all %}
+                  <a href="{% url 'it_manager_app:task-assign' pk=task.id %}" class="btn btn-danger link-to-page">
+                    Delete me from this task</a>
+                {% else %}
+                  <a href="{% url 'it_manager_app:task-assign' pk=task.id %}" class="btn btn-success">
+                    Assign me from this task</a>
+                {% endif %}
+              {% endif %}
+              {% csrf_token %}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 m-lg-4">
+          {% for worker in task.assignees.all %}
+            <hr>
+            <p class="text-muted"><strong>ID: <a href="{% url 'it_manager_app:worker-detail' pk=worker.id %}" class="link-info" >{{ worker.id }}</a></strong>
+            <p> Username: {{ worker.username }}</p>
+            <p> Full name : {{ worker.first_name }} {{ worker.last_name }}</p>
+            <p>
+              {% if worker.position %}
+                Position: {{ worker.position }}
+              {% endif %}
+            </p>
+          {% empty %}
+            <p>Sorry we don't know who must do this tasks</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -18,10 +18,10 @@
     <h1>{{ worker.first_name }} {{ worker.last_name }} </h1>
   <h4>Username:<strong class="text-dark"> {{ worker.username }}</strong></h4>
     <h6>Position <strong>{{ worker.position }}</strong></h6>
-      <a href=# class="btn btn-danger link-to-page">
+      <a href="{% url  'it_manager_app:worker-delete' pk=worker.id %}" class="btn btn-danger link-to-page">
         Delete
       </a>
-      <a href="#" class="btn btn-secondary link-to-page">
+      <a href="{% url  'it_manager_app:worker-update' pk=worker.id %}" class="btn btn-secondary link-to-page">
         Update
       </a>
   </dir>

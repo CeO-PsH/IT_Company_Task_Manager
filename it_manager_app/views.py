@@ -181,6 +181,16 @@ class WorkerCreateView(LoginRequiredMixin, generic.CreateView):
     model = Worker
     form_class = WorkerCreationForm
 
+class WorkerUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Worker
+    form_class = WorkerCreationForm
+
+class WorkerDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Worker
+    success_url = reverse_lazy("it_manager_app:worker-list")
+    template_name = "it_manager_app/worker_delete_confirm_delete.html"
+
+
 @login_required
 def task_assign(request, pk):
     worker = Worker.objects.get(id=request.user.id)

@@ -16,6 +16,8 @@ from it_manager_app.views import (
     PositionTypeDelete,
     PositionTypeUpdate,
     WorkerCreateView,
+    WorkerUpdateView,
+    WorkerDeleteView,
     TaskUpdateView,
     task_assign,
     about_us
@@ -39,6 +41,8 @@ urlpatterns = [
     path("worker/", WorkerListView.as_view(), name="worker-list"),
     path("worker/create", WorkerCreateView.as_view(), name="worker-create"),
     path("worker/<int:pk>/", WorkerDetailView.as_view(), name = "worker-detail"),
+    path("worker/<int:pk>/update", WorkerUpdateView.as_view(), name="worker-update"),
+    path("worker/<int:pk>/delete", WorkerDeleteView.as_view(), name="worker-delete"),
     path("task_assign/<int:pk>/", task_assign, name="task-assign"),
     path("about_us/",about_us, name="about-us")
 ]

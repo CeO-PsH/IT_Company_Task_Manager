@@ -1,9 +1,4 @@
-/*!
- * Bootstrap v5.1.1 (https://getbootstrap.com/)
- * Copyright 2011-2021 The Bootstrap Authors
- * Copyright 2011-2021 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
+
 :root {
   --bs-blue: #63B3ED;
   --bs-indigo: #596CFF;
@@ -1959,7 +1954,8 @@ progress {
             margin-inline-end: 0.75rem; }
 
 textarea.form-control {
-  min-height: unset; }
+  min-height: unset;
+}
 
 textarea.form-control-sm {
   min-height: unset; }
@@ -13862,7 +13858,7 @@ label,
   transition: 0.2s ease all; }
 
 .form-control {
-  border: none; }
+  border-color: #aba9a9; }
   .form-control.is-invalid {
     border: 1px solid #d2d6da;
     padding: 0.625rem 0.75rem;
@@ -17412,12 +17408,5 @@ pre[class*="language-"] {
   .ps {
     overflow: auto !important; } }
 
-/* Змінити колір рамки для полів у формі */
-.textinput inputtext{
-    border-color: red; /* Змініть колір на бажаний */
-}
-.class textinput inputtext form-control{
-        border-color: red; /* Змініть колір на бажаний */
-}
 
 /*# sourceMappingURL=material-kit.css.map */

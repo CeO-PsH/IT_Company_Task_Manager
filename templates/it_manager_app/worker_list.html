@@ -1,37 +1,53 @@
-{% extends "layouts/base_background.html" %}
-
-
-{% block content %}
-  <h1>Workers
-        <a style="float: right" href="{% url 'it_manager_app:worker-create'%}">+</a>
-  </h1>
-
-  {% if worker_list %}
-
-    <table class="table">
-    <tr>
-      <th>ID</th>
-      <th>Full Name</th>
-      <th>Username</th>
-      <th>Position</th>
-    </tr>
-
-    {% for worker in worker_list %}
-      <tr>
-        <td>
-          <a href="{{ worker.get_absolute_url }}">{{ worker.id }}</a>
-        </td>
-        <td>
-          {{ worker.first_name }} {{ worker.last_name }}
-        </td>
-        <td>
-          {{ worker.username }}
-        </td>
-        <td>
-          {{ worker.position|default_if_none:"" }}
-        </td>
-      </tr>
-    {% endfor %}
-    </table>
-  {% endif %}
+{% extends "layouts/base.html" %}
+{% block body_class %}
+  <header class="header-2">
+    <div class="page-header min-vh-45 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg10.jpg')">
+      <span class="mask bg-gradient-faded-warning opacity-4"></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 text-center mx-auto">
+            <h1 class="text-white pt-3 mt-n5">Workers list</h1>
+             <a href="{% url 'it_manager_app:worker-create'%}" class="btn btn-warning">Create worker</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div>
+    <div class="container">
+      <div class="row justify-content-center align-items-center mt-2">
+        <div class="d-flex justify-content-between align-items-center">
+          {% include 'includes/search_form.html' %}
+        </div>
+      </div>
+    </div>
+    <div class="table-container text-center mt-6">
+      <div class="d-inline-block smaller-block" style="width: 50% ;">
+        {% if worker_list %}
+          <table style="color: black" class="table align-items-center">
+            <thead style="color: black">
+            <tr style="color: black">
+              <th>ID</th>
+              <th>Full Name</th>
+              <th>Username</th>
+              <th>Position</th>
+            </tr>
+            </thead>
+            <hr>
+            {% for worker in worker_list %}
+              <tbody>
+              <tr>
+                <td> <a href="{{ worker.get_absolute_url }}" class="link-info">{{ worker.id }}</a></td>
+                <td>{{ worker.first_name }} {{ worker.last_name }}</td>
+                <td>{{ worker.username }} </td>
+                <td>{{ worker.position|default_if_none:"" }}</td>
+              </tr>
+              </tbody>
+            {% endfor %}
+          </table>
+          <hr>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 {% endblock %}

@@ -4,7 +4,6 @@
 
 {% block body_class %} sign-in-basic {% endblock %}
 
-<!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
@@ -31,22 +30,19 @@
                 </div>
               </div>
             </div>
-                <div class="text-center">
-                  <a href="{%url 'login'%}" type="submit"
-                          class="btn bg-gradient-faded-warning w-50 my-4 mb-2">
-                    <h7 class="text-white">
-                      Click her to login
-                    </h7>
-                  </a>
-                </div>
-            </div>
+              <div class="text-center">
+                <a href="{%url 'login'%}" type="submit"
+                   class="btn bg-gradient-faded-warning w-50 my-4 mb-2">
+                  <h7 class="text-white">
+                    Click her to login
+                  </h7>
+                </a>
+              </div>
           </div>
         </div>
       </div>
     </div>
-
-    {% include 'includes/footer-auth.html' %}
-
   </div>
-
+    {% include 'includes/footer-auth.html' %}
+  </div>
 {% endblock content %}

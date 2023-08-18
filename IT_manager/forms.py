@@ -51,6 +51,12 @@ class SearchForm(forms.Form):
         widget=forms.TimeInput(attrs={"placeholder": "Search by name"})
     )
 
-
+class WorkersSearchForm(forms.Form):
+    username = forms.CharField(
+        label="",
+        max_length=255,
+        required=False,
+        widget=forms.TimeInput(attrs={"placeholder": "Search by username"})
+    )
 
 

@@ -1,8 +1,7 @@
 {% extends 'layouts/base.html'%}
 
-
 {% block body_class %}
-    <header class="header-2">
+  <header class="header-2">
     <div class="page-header min-vh-45 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg10.jpg')">
       <span class="mask bg-gradient-faded-warning opacity-4"></span>
       <div class="container">
@@ -14,13 +13,12 @@
       </div>
     </div>
   </header>
- <div class="container">
-  <h1> Do you really want to delete this {{ task.name }}</h1>
-
+  <div class="container">
+    <h1> Do you really want to delete this {{ task.name }}</h1>
     <form action="" method="post" class="btn-group">
       {% csrf_token %}
       <input type="submit" value="Yes delete" class="btn btn-danger">
       <a href="{% url 'it_manager_app:task-list' %}" class="btn btn-info">Cancel</a>
     </form>
- </div>
+  </div>
 {% endblock %}

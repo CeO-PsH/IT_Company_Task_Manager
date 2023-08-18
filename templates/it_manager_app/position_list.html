@@ -1,54 +1,52 @@
 {% extends 'layouts/base.html' %}
 
-
 {% block body_class %}
-    <header class="header-2">
-    <div class="page-header min-vh-45 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg10.jpg')">
-      <span class="mask bg-gradient-faded-warning opacity-4"></span>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-7 text-center mx-auto">
-            <h1 class="text-white pt-3 mt-n5">Positions of workers</h1>
-            <a href="{% url 'it_manager_app:position-create'%}" class="btn btn-warning">Create new position</a>
-          </div>
+<header class="header-2">
+  <div class="page-header min-vh-45 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg10.jpg')">
+    <span class="mask bg-gradient-faded-warning opacity-4"></span>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7 text-center mx-auto">
+          <h1 class="text-white pt-3 mt-n5">Positions of workers</h1>
+          <a href="{% url 'it_manager_app:position-create'%}" class="btn btn-warning">Create new position</a>
         </div>
       </div>
     </div>
-  </header>
-    <div class="container">
-        <div class="row justify-content-center align-items-center mt-2">
-                <div class="d-flex justify-content-between align-items-center">
-                    {% include 'includes/search_form.html' %}
-                </div>
-        </div>
+  </div>
+</header>
+<div class="container">
+  <div class="row justify-content-center align-items-center mt-2">
+    <div class="d-flex justify-content-between align-items-center">
+      {% include 'includes/search_form.html' %}
     </div>
-    <div class="table-container text-center mt-6">
-        <div class="d-inline-block smaller-block" style="width: 50% ;">
-            {% if position_list %}
-                <table style="color: black" class="table align-items-center">
-                  <thead style="color: black">
-                    <tr style="color: black">
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Update</th>
-                        <th>Delete</th>
-                    </tr>
-                  </thead>
-                <hr>
-                  {% for position in position_list %}
-                      <tbody>
-                        <tr>
-                            <td>{{ position.id }}</td>
-                            <td>{{ position.name }}</td>
-                            <td><a class="link-info" href="{% url "it_manager_app:position-update" pk=position.id %}">Update</a></td>
-                            <td><a class="link-info" href="{% url "it_manager_app:position-delete" pk=position.id %}">Delete</a></td>
-                        </tr>
-                      </tbody>
-                    {% endfor %}
-                </table>
-              <hr>
-            {% endif %}
-    </div>
+  </div>
 </div>
-
+<div class="table-container text-center mt-6">
+  <div class="d-inline-block smaller-block" style="width: 50% ;">
+    {% if position_list %}
+    <table style="color: black" class="table align-items-center">
+      <thead style="color: black">
+        <tr style="color: black">
+          <th>ID</th>
+          <th>Name</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <hr>
+      {% for position in position_list %}
+      <tbody>
+        <tr>
+          <td>{{ position.id }}</td>
+          <td>{{ position.name }}</td>
+          <td><a class="link-info" href="{% url "it_manager_app:position-update" pk=position.id %}">Update</a></td>
+          <td><a class="link-info" href="{% url "it_manager_app:position-delete" pk=position.id %}">Delete</a></td>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+    <hr>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}

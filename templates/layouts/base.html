@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="{{ ASSETS_ROOT }}/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="{{ ASSETS_ROOT }}/img/favicon.png">
+  <link rel="icon" type="image/png" href="{{ ASSETS_ROOT }}/img/logo.png">
 
   <title>
     Task Manager
@@ -31,18 +31,16 @@
 </head>
 <body class="presentation-page bg-gray-200">
 
-{% include 'includes/navigation.html' %}
+  {% include 'includes/navigation.html' %}
 
   {% block body_class %}{% endblock %}
+
   {% include 'includes/pagination.html' %}
 
   {% include 'includes/footer.html' %} 
 
   {% include 'includes/scripts.html' %} 
 
-
-
-   <!-- Specific Page JS goes HERE  -->
    {% block javascripts %}{% endblock javascripts %}
 
 </body>

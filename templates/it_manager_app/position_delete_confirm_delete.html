@@ -1,6 +1,5 @@
 {% extends 'layouts/base.html'%}
 
-
 {% block body_class %}
     <header class="header-2">
     <div class="page-header min-vh-45 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg10.jpg')">
@@ -14,17 +13,13 @@
       </div>
     </div>
   </header>
-    {% block text_head %}
-      <h1 class="text-white pt-3 mt-n5">Delete position</h1>
-  {% endblock %}
- <div class="container">
-  <h1> Do you really want to delete this position</h1>
-   <p>All tasks with this position <strong>{{ position }}</strong> will be also deleted  </p>
-
-    <form action="" method="post" class="btn-group">
-      {% csrf_token %}
-      <input type="submit" value="Yes delete" class="btn btn-danger">
-      <a href="{% url 'it_manager_app:position-list' %}" class="btn btn-info">Cancel</a>
-    </form>
- </div>
+  <div class="container">
+    <h1> Do you really want to delete this position</h1>
+      <p>All tasks with this position <strong>{{ position }}</strong> will be also deleted  </p>
+        <form action="" method="post" class="btn-group">
+          {% csrf_token %}
+          <input type="submit" value="Yes delete" class="btn btn-danger">
+          <a href="{% url 'it_manager_app:position-list' %}" class="btn btn-info">Cancel</a>
+        </form>
+  </div>
 {% endblock %}

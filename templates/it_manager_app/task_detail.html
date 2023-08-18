@@ -8,7 +8,14 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-7 text-center mx-auto">
-            <h1 class="text-white pt-3 mt-n5"> Task detail</h1>
+            <h1 class="text-white pt-3 mt-n5">
+              Task detail
+              {% if task.is_completed is True %}
+                <h3 style="color: green"> Task Completed </h3>
+                {% else %}
+                <h3 style="color: red">Task required </h3>
+              {% endif %}
+            </h1>
           </div>
         </div>
       </div>
@@ -16,7 +23,7 @@
 </header>
   <dir class="container">
     <h1>{{ task.name }} </h1>
-  <h2>Priority:<strong class="text-dark"> {{ task.priority }}</strong></h2>
+  <h2>Priority:<strong class="text-dark"> {{ task.priority }} | Deadline: {{ task.deadline }}</strong></h2>
     <h6>Type of tasks: <strong>{{ task.task_type.name }}</strong></h6>
       <a href="{% url 'it_manager_app:task-delete' pk=task.id %}" class="btn btn-danger link-to-page">
         Delete
@@ -45,13 +52,15 @@
                           <h3>Workers</h3>
                       </div>
                       <div class="col-md-6 text-end">
-                          {% if task in user.tasks.all %}
-                              <a href="{% url 'it_manager_app:task-assign' pk=task.id %}" class="btn btn-danger link-to-page">
-                                  Delete me from this task</a>
-                          {% else %}
-                              <a href="{% url 'it_manager_app:task-assign' pk=task.id %}" class="btn btn-success">
-                                  Assign me from this task</a>
-                          {% endif %}
+                        {% if task.is_completed is False %}
+                            {% if task in user.tasks.all %}
+                                <a href="{% url 'it_manager_app:task-assign' pk=task.id %}" class="btn btn-danger link-to-page">
+                                    Delete me from this task</a>
+                            {% else %}
+                                <a href="{% url 'it_manager_app:task-assign' pk=task.id %}" class="btn btn-success">
+                                    Assign me from this task</a>
+                            {% endif %}
+                        {% endif %}
                           {% csrf_token %}
                       </div>
                   </div>
@@ -59,7 +68,7 @@
               <div class="col-md-12 m-lg-4">
                   {% for worker in task.assignees.all %}
                       <hr>
-                      <p class="text-muted"><strong>ID: {{ worker.id }}</strong>
+                    <p class="text-muted"><strong>ID: <a href="{% url 'it_manager_app:worker-detail' pk=worker.id %}" >{{ worker.id }}</a></strong>
                       <p> Username: {{ worker.username }}</p>
                       <p> Full name : {{ worker.first_name }} {{ worker.last_name }}</p>
                       <p>

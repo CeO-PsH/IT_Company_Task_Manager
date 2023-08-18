@@ -1,0 +1,7 @@
+.fild_body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Вирівнюємо контент по правому краю */
+    justify-content: center;
+    min-height: 100vh; /* Якщо ви хочете, щоб блок був центрований по вертикалі на весь висоту екрану */
+}

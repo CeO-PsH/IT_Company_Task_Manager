@@ -8,6 +8,7 @@ from it_manager_app.views import (
     TaskDetailView,
     WorkerDetailView,
     TaskCreateView,
+    TaskDeleteView,
     TaskTypeCreateView,
     PositionCreateView,
     TaskTypeDelete,
@@ -16,7 +17,8 @@ from it_manager_app.views import (
     PositionTypeUpdate,
     WorkerCreateView,
     TaskUpdateView,
-    task_assign
+    task_assign,
+    about_us
 )
 
 urlpatterns = [
@@ -29,6 +31,7 @@ urlpatterns = [
     path("task/<int:pk>/", TaskDetailView.as_view(), name = "task-detail"),
     path("task/create/", TaskCreateView.as_view(), name = "task-create"),
     path("task/<int:pk>/update/", TaskUpdateView.as_view(), name="task-update"),
+    path("task/<int:pk>/delete/", TaskDeleteView.as_view(), name="task-delete"),
     path("position/", PositionListView.as_view(), name = "position-list"),
     path("position/create/", PositionCreateView.as_view(), name="position-create"),
     path("position/<int:pk>/delete/", PositionTypeDelete.as_view(), name="position-delete"),
@@ -36,7 +39,8 @@ urlpatterns = [
     path("worker/", WorkerListView.as_view(), name="worker-list"),
     path("worker/create", WorkerCreateView.as_view(), name="worker-create"),
     path("worker/<int:pk>/", WorkerDetailView.as_view(), name = "worker-detail"),
-    path("task_assign/<int:pk>/", task_assign, name="task-assign")
+    path("task_assign/<int:pk>/", task_assign, name="task-assign"),
+    path("about_us/",about_us, name="about-us")
 ]
 
 app_name = "it_manager_app"

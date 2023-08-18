@@ -12,7 +12,7 @@ from it_manager_app.models import Worker, Task, TaskType, Position
 @login_required
 def index(request):
     num_worker = Worker.objects.count()
-    num_tasks = Task.objects.count()
+    num_tasks = Task.objects.filter(is_completed=True).count()
     num_type_of_tasks = TaskType.objects.count()
     position = Position.objects.count()
 
@@ -118,6 +118,10 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
     form_class = TacksForm
 
+class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Task
+    success_url = reverse_lazy("it_manager_app:task-list")
+    template_name = "it_manager_app/task_delete_confirm_delete.html"
 
 
 class PositionListView(LoginRequiredMixin, generic.ListView):
@@ -187,3 +191,7 @@ def task_assign(request, pk):
     else:
         worker.tasks.add(pk)
     return HttpResponseRedirect(reverse_lazy("it_manager_app:task-detail", args=[pk]))
+
+
+def about_us(request):
+    return render(request, "it_manager_app/about-us.html")

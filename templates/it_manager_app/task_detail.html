@@ -1,33 +1,78 @@
-{% extends 'layouts/base_background.html' %}
+{% extends "layouts/base.html" %}
 
 
-{% block content %}
-  <h1>
-    Task: {{ task.name }}
-    <a style="float: right" href="{% url 'it_manager_app:task-update' pk=task.id%}">Edit</a>
-  </h1>
-  <h3>Priority {{ task.priority }}</h3>
+{% block body_class %}
+  <header class="header-2">
+    <div class="page-header min-vh-45 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg10.jpg')">
+      <span class="mask bg-gradient-faded-warning opacity-4"></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 text-center mx-auto">
+            <h1 class="text-white pt-3 mt-n5"> Task detail</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+  <dir class="container">
+    <h1>{{ task.name }} </h1>
+  <h2>Priority:<strong class="text-dark"> {{ task.priority }}</strong></h2>
+    <h6>Type of tasks: <strong>{{ task.task_type.name }}</strong></h6>
+      <a href="{% url 'it_manager_app:task-delete' pk=task.id %}" class="btn btn-danger link-to-page">
+        Delete
+      </a>
+      <a href="{% url 'it_manager_app:task-update' pk=task.id %}" class="btn btn-secondary link-to-page">
+        Update
+      </a>
+  </dir>
+  <div class="container mt-2">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="col-md-12">
+                  <h3>Description</h3>
+                  <p>{{ task.description }}</p>
+              </div>
+          </div>
+      </div>
+  </div>
 
-  <p> {{ task.description }} </p>
-  <div class="ml-3"></div>
-    <h3>Workers </h3>
-      {% for worker in task.assignees.all %}
-        <hr>
-        <p class="text-muted"><strong>ID: {{ worker.id }}</strong>
-        <p>{{ worker.first_name }} {{ worker.last_name }}
-        {% if worker.position %}
-          {{ worker.position }}
-        {% endif %}</p>
-        {% empty %}
-        <p>Sorry we don`t know who must do this tasks</p>
-      {% endfor %}
+  <div class="container mt-2">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="container mt-2">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <h3>Workers</h3>
+                      </div>
+                      <div class="col-md-6 text-end">
+                          {% if task in user.tasks.all %}
+                              <a href="{% url 'it_manager_app:task-assign' pk=task.id %}" class="btn btn-danger link-to-page">
+                                  Delete me from this task</a>
+                          {% else %}
+                              <a href="{% url 'it_manager_app:task-assign' pk=task.id %}" class="btn btn-success">
+                                  Assign me from this task</a>
+                          {% endif %}
+                          {% csrf_token %}
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-12 m-lg-4">
+                  {% for worker in task.assignees.all %}
+                      <hr>
+                      <p class="text-muted"><strong>ID: {{ worker.id }}</strong>
+                      <p> Username: {{ worker.username }}</p>
+                      <p> Full name : {{ worker.first_name }} {{ worker.last_name }}</p>
+                      <p>
+                        {% if worker.position %}
+                          Position: {{ worker.position }}
+                      {% endif %}
+                      </p>
+                  {% empty %}
+                      <p>Sorry we don't know who must do this tasks</p>
+                  {% endfor %}
+              </div>
+          </div>
+      </div>
+  </div>
 
-  {% if task in user.tasks.all %}
-      <a href="{% url 'it_manager_app:task-assign' pk=task.id %}" class="btn btn-danger link-to-page">
-        Delete me from this task</a>
-  {% else %}
-      <a href="{% url 'it_manager_app:task-assign' pk=task.id %}" class="btn btn-primary link-to-page">
-        Assign me from this task</a>
-    {% csrf_token %}
-  {% endif %}
 {% endblock %}

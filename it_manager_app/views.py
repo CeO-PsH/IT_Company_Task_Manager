@@ -239,6 +239,7 @@ def task_assign(request, pk):
         reverse_lazy("it_manager_app:task-detail", args=[pk])
     )
 
+
 @login_required
 def about_us(request):
     return render(request, "it_manager_app/about-us.html")

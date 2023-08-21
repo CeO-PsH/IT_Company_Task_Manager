@@ -1,25 +1,17 @@
 {% extends "layouts/base.html" %}
 
+{% block header_content %}
+  <h1 class="text-white pt-3 mt-n5">
+    Task detail
+    {% if task.is_completed is True %}
+      <h3 style="color: green"> Task Completed </h3>
+    {% else %}
+      <h3 style="color: red">Task required </h3>
+    {% endif %}
+  </h1>
+{% endblock %}
+
 {% block body_class %}
-  <header class="header-2">
-    <div class="page-header min-vh-45 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg10.jpg')">
-      <span class="mask bg-gradient-faded-warning opacity-4"></span>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-7 text-center mx-auto">
-            <h1 class="text-white pt-3 mt-n5">
-              Task detail
-              {% if task.is_completed is True %}
-              <h3 style="color: green"> Task Completed </h3>
-                {% else %}
-                <h3 style="color: red">Task required </h3>
-              {% endif %}
-            </h1>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
   <div class="container">
     <h1>{{ task.name }} </h1>
     <h2>Priority:<strong class="text-dark"> {{ task.priority }} | Deadline: {{ task.deadline }}</strong></h2>

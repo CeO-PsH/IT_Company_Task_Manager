@@ -1,19 +1,11 @@
 {% extends 'layouts/base.html' %}
 
+{% block header_content %}
+  <h1 class="text-white pt-3 mt-n5">Positions of workers</h1>
+  <a href="{% url 'it_manager_app:position-create'%}" class="btn btn-warning">Create new position</a>
+{% endblock %}
+
 {% block body_class %}
-<header class="header-2">
-  <div class="page-header min-vh-45 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg10.jpg')">
-    <span class="mask bg-gradient-faded-warning opacity-4"></span>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-7 text-center mx-auto">
-          <h1 class="text-white pt-3 mt-n5">Positions of workers</h1>
-          <a href="{% url 'it_manager_app:position-create'%}" class="btn btn-warning">Create new position</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
 <div class="container">
   <div class="row justify-content-center align-items-center mt-2">
     <div class="d-flex justify-content-between align-items-center">
@@ -43,6 +35,8 @@
           <td><a class="link-info" href="{% url "it_manager_app:position-delete" pk=position.id %}">Delete</a></td>
         </tr>
       </tbody>
+      {% empty %}
+        <p> There are no position in the list</p>
       {% endfor %}
     </table>
     <hr>

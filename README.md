@@ -4,6 +4,8 @@ Django project for manage tasks in IT company
 
 ## Check it out!
 [ It Company Task Manager deployed to Render](https://it-company-task-manager-fi9a.onrender.com/)
+login: user
+password: user12345
 ## Installation
 
 Python3 must be already installed
